@@ -19,7 +19,7 @@
             android:layout_width="fill_parent"
             android:layout_height="1dp"
             android:layout_gravity="center"
-            android:background="#448AFF" />
+            android:background="@color/backgroundview" />
 
         <EditText
             android:id="@+id/inputEmail"
@@ -49,7 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="50dp"
-            android:background="#34755685"
+            android:background="@color/abu_abu_muda"
             android:text="@string/login"
             android:textStyle="bold" />
 
@@ -59,7 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
-            android:text="register here!"
+            android:text="@string/register_here"
             android:textAlignment="center"
             android:textColor="@color/colorPrimary"/>
 
