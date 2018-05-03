@@ -29,7 +29,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View V) {
                 final String name = inputName.getText().toString();
                 final String email = emailInputReg.getText().toString();
-                final String pass = passInputReg.getText().toString();
+                final String password = passInputReg.getText().toString();
 
                 Response.Listener<String> responseListener = new Response.Listener<String> () {
                     @Override
@@ -50,7 +50,7 @@ public class RegisterActivity extends AppCompatActivity {
                         }
                     }
                 };
-                RegisterRequest registerRequest = new RegisterRequest(name,email,pass,responseListener);
+                RegisterRequest registerRequest = new RegisterRequest(name,email,password,responseListener);
                 RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
                 queue.add(registerRequest);
             }
