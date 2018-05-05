@@ -2,6 +2,7 @@ package id.ac.ui.jhotel_android_luthfi;
 
 //import android.support.v7.app.AlertDialog;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,7 +26,7 @@ public class LoginActivity extends AppCompatActivity {
         final EditText emailInput = findViewById(R.id.inputEmail);
         final EditText passInput = findViewById(R.id.inputPass);
         final Button loginButton = findViewById(R.id.buttonLogin);
-        final TextView registerClickable = (TextView) findViewById(R.id.registerClickable);
+        final TextView registerClickable = findViewById(R.id.registerClickable);
 
         loginButton.setOnClickListener (new View.OnClickListener() {
             @Override
@@ -38,22 +39,24 @@ public class LoginActivity extends AppCompatActivity {
                         try{
                             JSONObject jsonResponse = new JSONObject(response);
                             if(jsonResponse!=null) {
-                                AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-                                builder.setMessage("Login Success")
-                                        .create()
-                                        .show();
+                                AlertDialog builder = new AlertDialog.Builder(LoginActivity.this).create();
+                                //AlertDialog test = new AlertDialog.Builder(LoginActivity.this).create();
+                                builder.setMessage("Login Success");
+                                builder.show();
+                                //builder.wait(1200);
+                                //builder.dismiss();
+                                //launchIntent();
                             }
                         } catch (JSONException e) {
                             AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-                            builder.setMessage("Login Failed.")
-                                    .create()
-                                    .show();
+                            builder.setMessage("Login Failed.").create().show();
                         }
                     }
                 };
                 LoginRequest loginRequest = new LoginRequest(email,password,responseListener);
                 RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
                 queue.add(loginRequest);
+
             }
         });
 
@@ -65,4 +68,11 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
+    /*
+    private void launchIntent() {
+        Intent it = new Intent(LoginActivity.this, MainActivity.class);
+        it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(it);
+    }*/
 }
