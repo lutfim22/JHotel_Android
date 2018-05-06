@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.TextView;
 
 public class MenuListAdapter extends BaseExpandableListAdapter {
@@ -38,7 +39,7 @@ public class MenuListAdapter extends BaseExpandableListAdapter {
     public View getChildView(int groupPosition, final int childPosition,
                              boolean isLastChild, View convertView, ViewGroup parent) {
 
-        final String childText = getChild(groupPosition, childPosition).toString();
+        final String childText = ((Room) getChild(groupPosition, childPosition)).getRoomNumber();
 
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this._context
@@ -46,7 +47,7 @@ public class MenuListAdapter extends BaseExpandableListAdapter {
             convertView = infalInflater.inflate(R.layout.layout_room, null);
         }
 
-        TextView txtListChild = convertView
+        TextView txtListChild = (TextView) convertView
                 .findViewById(R.id.child);
 
         txtListChild.setText(childText);
@@ -84,7 +85,7 @@ public class MenuListAdapter extends BaseExpandableListAdapter {
             convertView = infalInflater.inflate(R.layout.layout_hotel, null);
         }
 
-        TextView lblListHeader = convertView
+        TextView lblListHeader = (TextView) convertView
                 .findViewById(R.id.groupHeader);
         lblListHeader.setTypeface(null, Typeface.BOLD);
         lblListHeader.setText(headerTitle);

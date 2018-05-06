@@ -9,9 +9,6 @@ public class Lokasi {
     private double y_coord;
     private String deskripsi;
 
-    public Lokasi() {
-    }
-
     public Lokasi(double x_coord, double y_coord, String deskripsi) {
         this.x_coord = x_coord;
         this.y_coord = y_coord;

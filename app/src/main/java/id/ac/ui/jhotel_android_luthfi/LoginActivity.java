@@ -39,24 +39,25 @@ public class LoginActivity extends AppCompatActivity {
                         try{
                             JSONObject jsonResponse = new JSONObject(response);
                             if(jsonResponse!=null) {
-                                AlertDialog builder = new AlertDialog.Builder(LoginActivity.this).create();
-                                //AlertDialog test = new AlertDialog.Builder(LoginActivity.this).create();
-                                builder.setMessage("Login Success");
-                                builder.show();
-                                //builder.wait(1200);
-                                //builder.dismiss();
-                                //launchIntent();
+                                AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                                builder.setMessage("Login Success")
+                                        .create()
+                                        .show();
+                                Intent mainInt = new Intent(LoginActivity.this, MainActivity.class);
+                                mainInt.putExtra("id_customer", jsonResponse.getInt("id"));
+                                LoginActivity.this.startActivity(mainInt);
                             }
                         } catch (JSONException e) {
                             AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-                            builder.setMessage("Login Failed.").create().show();
+                            builder.setMessage("Login Failed.")
+                                    .create()
+                                    .show();
                         }
                     }
                 };
                 LoginRequest loginRequest = new LoginRequest(email,password,responseListener);
                 RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
                 queue.add(loginRequest);
-
             }
         });
 
@@ -68,11 +69,4 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-
-    /*
-    private void launchIntent() {
-        Intent it = new Intent(LoginActivity.this, MainActivity.class);
-        it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(it);
-    }*/
 }
