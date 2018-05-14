@@ -1,1 +1,0 @@
-# JHotel_Android
