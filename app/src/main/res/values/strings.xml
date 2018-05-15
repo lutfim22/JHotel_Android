@@ -43,4 +43,5 @@
     <string name="tarif_kamar">Tarif Kamar :</string>
     <string name="tipe_kamar">Tipe Kamar :</string>
     <string name="pesan_kamar_hotel">Pesan Kamar Hotel</string>
+    <string name="informasi_hotel">Informasi Hotel</string>
 </resources>

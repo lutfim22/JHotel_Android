@@ -33,7 +33,6 @@ public class DashboardActivity extends AppCompatActivity {
         }
 
         btn_pesan.setOnClickListener(new View.OnClickListener() {
-             
             @Override
             public void onClick(View view) {
                 // Menampilkan screen pesan
@@ -82,7 +81,7 @@ public class DashboardActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Toast.makeText(this, "Selected Item: " +item.getTitle(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, item.getTitle()+" berhasil", Toast.LENGTH_SHORT).show();
         switch (item.getItemId()) {
             case R.id.logoutmenu:
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);

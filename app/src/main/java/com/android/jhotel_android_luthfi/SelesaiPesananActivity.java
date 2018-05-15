@@ -1,6 +1,7 @@
 package com.android.jhotel_android_luthfi;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -107,7 +108,6 @@ public class SelesaiPesananActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
     }
 
     public void fetchPesanan(){
@@ -116,7 +116,6 @@ public class SelesaiPesananActivity extends AppCompatActivity {
         final TextView biaya = findViewById(R.id.biaya);
         final TextView tanggal_pesan = findViewById(R.id.tanggal);
         final TextView hari = findViewById(R.id.hari);
-
 
         Response.Listener<String> responseListener = new Response.Listener<String> () {
             @Override
@@ -133,10 +132,18 @@ public class SelesaiPesananActivity extends AppCompatActivity {
                     hari.setText(String.valueOf(jumlah_hari));
                     tanggal_pesan.setText(tanggal);
                 } catch (JSONException e) {
-                    Intent gagalInt = new Intent(SelesaiPesananActivity.this, DashboardActivity.class);
-                    gagalInt.putExtra("id_customer", currentUserId);
-                    SelesaiPesananActivity.this.startActivity(gagalInt);
-
+                    android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(SelesaiPesananActivity.this);
+                    builder.setMessage("Belum ada pesanan!")
+                            .setCancelable(false)
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    Intent gagalInt = new Intent(SelesaiPesananActivity.this, DashboardActivity.class);
+                                    gagalInt.putExtra("id_customer", currentUserId);
+                                    SelesaiPesananActivity.this.startActivity(gagalInt);
+                                }
+                            });
+                    android.support.v7.app.AlertDialog alert = builder.create();
+                    alert.show();
                 }
             }
         };

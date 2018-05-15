@@ -1,7 +1,10 @@
 package com.android.jhotel_android_luthfi;
 
 import android.app.Activity;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
@@ -25,7 +28,10 @@ public class InfoHotelActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.info_hotel_layout);
 
-        /*
+        fetchHotel();
+    }
+
+    public void fetchHotel(){
         final TextView namaHotel = findViewById(R.id.nama_hotel);
         final TextView lokasiHotel = findViewById(R.id.lokasi);
         final TextView bintangHotel = findViewById(R.id.bintang);
@@ -42,7 +48,6 @@ public class InfoHotelActivity extends Activity{
         final TextView dailyTariff3 = findViewById(R.id.daily_tariff3);
         final TextView tipeKamar3 = findViewById(R.id.tipe_kamar3);
 
-
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -50,49 +55,44 @@ public class InfoHotelActivity extends Activity{
                     JSONArray jsonResponse = new JSONArray(response);
                     JSONObject hotel = jsonResponse.getJSONObject(0).getJSONObject("hotel");
                     JSONObject lokasi = hotel.getJSONObject("lokasi");
-                    Hotel h = new Hotel(hotel.getInt("id"), hotel.getString("nama"),
-                            new Lokasi(lokasi.getDouble("x"), lokasi.getDouble("y"), lokasi.getString("deskripsi")),
-                            hotel.getInt("bintang"));
-                    listHotel.add(h);
+                    namaHotel.setText(hotel.getString("nama"));
+                    lokasiHotel.setText(lokasi.getString("deskripsi"));
+                    bintangHotel.setText(String.valueOf(hotel.getInt("bintang")));
 
-                    for (int i = 0; i < jsonResponse.length(); i++) {
-                        JSONObject room = jsonResponse.getJSONObject(i);
-                        Room room1 = new Room(room.getString("nomorKamar"), room.getString("statusKamar"),
-                                room.getDouble("dailyTariff"), room.getString("tipeKamar"));
-                        listRoom.add(room1);
-                    }
+                    JSONObject room1 = jsonResponse.getJSONObject(0);
+                    nomorKamar1.setText(room1.getString("nomorKamar"));
+                    statusKamar1.setText(room1.getString("statusKamar"));
+                    dailyTariff1.setText(String.valueOf(room1.getDouble("dailyTariff")));
+                    tipeKamar1.setText(room1.getString("tipeKamar"));
+
+                    JSONObject room2 = jsonResponse.getJSONObject(1);
+                    nomorKamar2.setText(room2.getString("nomorKamar"));
+                    statusKamar2.setText(room2.getString("statusKamar"));
+                    dailyTariff2.setText(String.valueOf(room2.getDouble("dailyTariff")));
+                    tipeKamar2.setText(room2.getString("tipeKamar"));
+
+                    JSONObject room3 = jsonResponse.getJSONObject(2);
+                    nomorKamar3.setText(room3.getString("nomorKamar"));
+                    statusKamar3.setText(room3.getString("statusKamar"));
+                    dailyTariff3.setText(String.valueOf(room3.getDouble("dailyTariff")));
+                    tipeKamar3.setText(room3.getString("tipeKamar"));
                 }catch (JSONException e1) {
-                    e1.printStackTrace();
+                    AlertDialog.Builder builder = new AlertDialog.Builder(InfoHotelActivity.this);
+                    builder.setMessage("Data gagal dimuat")
+                            .setCancelable(false)
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    Intent i = new Intent(InfoHotelActivity.this, DashboardActivity.class);
+                                    startActivity(i);
+                                }
+                            });
+                    AlertDialog alert = builder.create();
+                    alert.show();
                 }
             }
         };
         MenuRequest menuRequest = new MenuRequest(responseListener);
         RequestQueue queue = newRequestQueue(this);
         queue.add(menuRequest);
-
-
-        Hotel h1 = listHotel.get(0);
-        namaHotel.setText(h1.getNama());
-        lokasiHotel.setText(h1.getLokasi().getDeskripsi());
-        bintangHotel.setText(String.valueOf(h1.getBintang()));
-
-        Room r1 = listRoom.get(0);
-        nomorKamar1.setText(r1.getRoomNumber());
-        statusKamar1.setText(r1.getStatusKamar());
-        dailyTariff1.setText(String.valueOf(r1.getDailyTariff()));
-        tipeKamar1.setText(r1.getTipeKamar());
-
-        Room r2 = listRoom.get(0);
-        nomorKamar2.setText(r2.getRoomNumber());
-        statusKamar2.setText(r2.getStatusKamar());
-        dailyTariff2.setText(String.valueOf(r2.getDailyTariff()));
-        tipeKamar2.setText(r2.getTipeKamar());
-
-        Room r3 = listRoom.get(0);
-        nomorKamar3.setText(r3.getRoomNumber());
-        statusKamar3.setText(r3.getStatusKamar());
-        dailyTariff3.setText(String.valueOf(r3.getDailyTariff()));
-        tipeKamar3.setText(r3.getTipeKamar());
-        */
     }
 }
